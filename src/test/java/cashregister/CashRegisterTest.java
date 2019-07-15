@@ -3,6 +3,7 @@ package cashregister;
 
 import org.junit.jupiter.api.Test;
 
+
 import static org.mockito.Mockito.*;
 
 public class CashRegisterTest {
@@ -11,8 +12,17 @@ public class CashRegisterTest {
     @Test
     public void should_print_the_real_purchase_when_call_process() {
         //given
+        Printer printer = mock(Printer.class);
+        CashRegister cashRegister = new CashRegister(printer);
+        Item item = new Item("apple",13.5);
+        Item[] items=new Item[]{item};
+        Purchase purchase = new Purchase(items);
+
         //when
+        cashRegister.process(purchase);
+
         //then
+        verify(printer,times(1)).print("apple"+"\t"+13.5+"\n");
     }
 
     @Test
