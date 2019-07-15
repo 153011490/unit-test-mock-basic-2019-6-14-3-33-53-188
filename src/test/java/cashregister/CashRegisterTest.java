@@ -28,15 +28,21 @@ public class CashRegisterTest {
     @Test
     public void should_print_the_stub_purchase_when_call_process() {
         //given
+        Printer printer = mock(Printer.class);
+        CashRegister cashRegister = new CashRegister(printer);
+        Purchase purchase = mock(Purchase.class);
+        when(purchase.asString()).thenReturn("do some cool things");
+
         //when
+        cashRegister.process(purchase);
+
         //then
+        verify(printer,times(1)).print("do some cool things");
     }
 
     @Test
     public void should_verify_with_process_call_with_mockito() {
-        //given
-        //when
-        //then
+
     }
 
 }
