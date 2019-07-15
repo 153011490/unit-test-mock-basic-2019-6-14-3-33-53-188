@@ -42,7 +42,18 @@ public class CashRegisterTest {
 
     @Test
     public void should_verify_with_process_call_with_mockito() {
+//given
+        Printer printer = mock(Printer.class);
+        CashRegister cashRegister = new CashRegister(printer);
+        Item item = new Item("apple",13.5);
+        Item[] items=new Item[]{item};
+        Purchase purchase = new Purchase(items);
 
+        //when
+        cashRegister.process(purchase);
+
+        //then
+        verify(printer,times(1)).print("apple"+"\t"+13.5+"\n");
     }
 
 }
